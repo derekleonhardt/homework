@@ -1,0 +1,15 @@
+services:
+  homework:
+    container_name: homework
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      DATABASE_URL: file:/data/homework.db
+    ports:
+      - "127.0.0.1:3000:3000"
+    volumes:
+      - ./prisma:/data

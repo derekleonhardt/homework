@@ -1,0 +1,11 @@
+.git
+.gitignore
+.next
+node_modules
+coverage
+backups
+thoughts
+.claude
+.opencode
+.env
+*.log

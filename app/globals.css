@@ -1,0 +1,222 @@
+@import "tailwindcss";
+
+@theme inline {
+  /* Warm Neutrals - Richer with more contrast */
+  --color-warm-50: #ffffff;
+  --color-warm-100: #faf9f7;
+  --color-warm-200: #f0eee9;
+  --color-warm-300: #e0dcd4;
+  --color-warm-400: #c4bfb4;
+  --color-warm-500: #868179;
+  --color-warm-600: #5c5752;
+  --color-warm-700: #2d2a26;
+  --color-warm-800: #1f1d1a;
+  --color-warm-900: #141311;
+
+  /* Accent - Azure blue */
+  --color-accent-400: #4ba0d4;
+  --color-accent-500: #3b8fc4;
+  --color-accent-600: #2d71a0;
+
+  /* Typography */
+  --font-lora: "Lora", Georgia, serif;
+  --font-dm-sans: "DM Sans", system-ui, sans-serif;
+}
+
+body {
+  background-color: var(--color-warm-100);
+  color: var(--color-warm-700);
+  font-family: var(--font-inter), system-ui, sans-serif;
+}
+
+/* Modal animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.modal-overlay {
+  animation: fadeIn 150ms ease-out;
+}
+
+.modal-content {
+  animation: slideUp 200ms ease-out;
+}
+
+/* Respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .modal-overlay,
+  .modal-content {
+    animation: none;
+  }
+}
+
+/* Skeleton loading animation */
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.skeleton {
+  position: relative;
+  overflow: hidden;
+  background-color: var(--color-warm-200);
+}
+
+.skeleton::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(90deg, transparent, var(--color-warm-100), transparent);
+  animation: shimmer 1.5s infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skeleton::after {
+    animation: none;
+  }
+}
+
+/* Gallery Card Animations */
+@keyframes cardReveal {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.gallery-card {
+  animation: cardReveal 0.5s ease-out backwards;
+  animation-delay: calc(var(--card-index, 0) * 0.05s);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gallery-card {
+    animation: none;
+  }
+}
+
+/* Warm image filter */
+.card-image {
+  filter: saturate(0.9) contrast(1.05) brightness(1.02);
+}
+
+/* Masonry Grid */
+.masonry-grid {
+  display: flex;
+  margin-left: -16px;
+  width: auto;
+}
+
+.masonry-grid-column {
+  padding-left: 16px;
+  background-clip: padding-box;
+}
+
+.masonry-grid-column > * {
+  margin-bottom: 16px;
+}
+
+/* Mobile Drawer Animations */
+@keyframes drawerSlideIn {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes drawerBackdropIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.drawer-panel {
+  animation: drawerSlideIn 200ms ease-out;
+}
+
+.drawer-backdrop {
+  animation: drawerBackdropIn 150ms ease-out;
+}
+
+/* Context Menu Animations */
+@keyframes contextMenuSheetIn {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.context-menu-sheet {
+  animation: contextMenuSheetIn 200ms ease-out;
+}
+
+.context-menu-backdrop {
+  animation: drawerBackdropIn 150ms ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .drawer-panel,
+  .drawer-backdrop,
+  .context-menu-sheet,
+  .context-menu-backdrop {
+    animation: none;
+  }
+}
+
+/* Dark Mode Overrides */
+.dark {
+  --color-warm-50: #1a1816;
+  --color-warm-100: #1f1d1a;
+  --color-warm-200: #2a2621;
+  --color-warm-300: #3d3933;
+  --color-warm-400: #5c5752;
+  --color-warm-500: #868179;
+  --color-warm-600: #c4bfb4;
+  --color-warm-700: #f0eee9;
+  --color-warm-800: #faf9f7;
+  --color-warm-900: #ffffff;
+
+  --color-accent-400: #5aafe3;
+  --color-accent-500: #4ba0d4;
+  --color-accent-600: #6cb8e8;
+}
